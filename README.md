@@ -1,2 +1,2 @@
 # Installation
-A python script for Xash3D that finds server information from ip and port
+pkg install python3 && python3 xashserver.py
