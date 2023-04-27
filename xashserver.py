@@ -1,36 +1,32 @@
 #import
-
 import socket
 import os
 
 #os
-
 os.system("clear")
 
+print("""
+----- Coded by SpRaY -----
+Discord: ! SpRaY
+""")
+
 #input
+ip = input("Sunucu IP adresi: ")
+port = input("Sunucu Portu: ")
 
-print("----- Coded by SpRaY ----- \n")
-print("Discord: ! SpRaY \n")
-
-HOST = input("Sunucu IP adresi: ")
-PORT = 27015
+addr = (ip, int(port))
 
 #socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-message = b"\xff\xff\xff\xffTSource"
-s.sendto(message, (HOST, PORT))
+packet = b"\xff\xff\xff\xffTSource"
 
 #get info
-
 try:
-    data, addr = s.recvfrom(1024)
-except KeyboardInterrupt:
-    print("Program sonlandırıldı.")
-else:
+    sock.sendto(packet, addr)
+    data = sock.recvfrom(1024)
     print(data)
+except Exception as err:
+    print(f"Program sonlandırıldı.\n {err}")
 
-#end
-
-s.close()
+sock.close()
